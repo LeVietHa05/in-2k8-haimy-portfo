@@ -5,11 +5,13 @@ import { useState } from "react";
 import Aboutme from "./components/aboutme";
 import Smallbook from "./components/smallbook";
 import { createPortal } from "react-dom";
+import CanonEDS from "./components/canoneds";
 
 export default function Home() {
 
   const [showAbout, setShowAbout] = useState(false)
   const [activeSmallBook, setactivesmallbook] = useState<number | null>(null)
+  const [showCanonEDS, setshowcanoneds] = useState(false)
 
   return (
     <div className="w-[1440px] mx-auto relative z-1">
@@ -40,7 +42,7 @@ export default function Home() {
           <div className="flex-3">
             <Image src={'/home-instax.svg'} alt="" width={105} height={120}></Image>
           </div>
-          <div className="flex-3">
+          <div className="flex-3" onClick={() => setshowcanoneds(true)}>
             <Image src={'/home-canon-eds.svg'} alt="" width={134} height={120} ></Image>
           </div>
         </div>
@@ -71,6 +73,7 @@ export default function Home() {
       </div>
       {showAbout && createPortal(<Aboutme onClose={() => setShowAbout(false)} />, document.body)}
       {activeSmallBook && createPortal(<Smallbook onClose={() => setactivesmallbook(null)} activeSmallBook={activeSmallBook} />, document.body)}
+      {showCanonEDS && createPortal(<CanonEDS onClose={() => setshowcanoneds(false)} />, document.body)}
     </div>
   );
 }
