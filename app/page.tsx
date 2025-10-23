@@ -6,12 +6,14 @@ import Aboutme from "./components/aboutme";
 import Smallbook from "./components/smallbook";
 import { createPortal } from "react-dom";
 import CanonEDS from "./components/canoneds";
+import CanonIxy from "./components/canonixy";
 
 export default function Home() {
 
   const [showAbout, setShowAbout] = useState(false)
   const [activeSmallBook, setactivesmallbook] = useState<number | null>(null)
   const [showCanonEDS, setshowcanoneds] = useState(false)
+  const [showCanonIxy, setshowcanonixy] = useState(false)
 
   return (
     <div className="w-[1440px] mx-auto relative z-1">
@@ -36,7 +38,7 @@ export default function Home() {
         </div>
 
         <div className=" flex z-1 h-40 justify-between items-end mt-12 ml-4">
-          <div className="flex-4">
+          <div className="flex-4" onClick={() => setshowcanonixy(true)}>
             <Image src={'/home-canon-ixy.svg'} alt="" width={135} height={80} ></Image>
           </div>
           <div className="flex-3">
@@ -74,6 +76,7 @@ export default function Home() {
       {showAbout && createPortal(<Aboutme onClose={() => setShowAbout(false)} />, document.body)}
       {activeSmallBook && createPortal(<Smallbook onClose={() => setactivesmallbook(null)} activeSmallBook={activeSmallBook} />, document.body)}
       {showCanonEDS && createPortal(<CanonEDS onClose={() => setshowcanoneds(false)} />, document.body)}
+      {showCanonIxy && createPortal(<CanonIxy onClose={() => setshowcanonixy(false)} />, document.body)}
     </div>
   );
 }
